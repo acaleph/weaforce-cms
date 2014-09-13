@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee web-jsptaglibrary_2_0.xsd" version="2.0">
+    <tlib-version>2.0</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>pagination</short-name>
+    <uri>http://weaforce.com/commons/</uri>
+    <display-name>Paginantion Tag</display-name>
+    <description>Pagination Tag library</description>
+
+    <tag>
+      <name>page</name>
+      <tag-class>cn.javass.common.pagination.NavigationTag</tag-class>
+      <body-content>JSP</body-content>
+      <description>create navigation for paging</description>
+      <attribute>
+           <name>bean</name>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>showJump</name>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>url</name>
+           <required>true</required>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>optimize</name>
+           <required>false</required>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+    </tag>
+     <tag>
+      <name>pageV2</name>
+      <tag-class>cn.javass.common.pagination.NavigationTagV2</tag-class>
+      <body-content>JSP</body-content>
+      <description>create navigation for paging</description>
+      <attribute>
+           <name>bean</name>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>number</name>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>url</name>
+           <required>true</required>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+      <attribute>
+           <name>optimize</name>
+           <required>false</required>
+           <rtexprvalue>true</rtexprvalue>
+      </attribute>
+    </tag>
+</taglib>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans 	xmlns="http://www.springframework.org/schema/beans"
+		xmlns:s="http://www.springframework.org/schema/security"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+							http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                        	http://www.springframework.org/schema/security 
+                        	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+	
+	<description>使用SpringSecurity的安全配置文件</description>
+	<!-- http安全配置 /console.action access-denied-page="/common/jsp/403.jsp" -->
+	<s:http auto-config="true"  use-expressions="true">
+		<s:intercept-url pattern="/app/**" access="hasRole('ROLE_CMS_CRUD_USER')" />
+		<s:intercept-url pattern="/admin/**" access="hasRole('ROLE_CMS_CRUD_USER')" />
+		<s:intercept-url pattern="/cms/**" access="hasRole('ROLE_CMS_CRUD_USER')" />
+		<s:form-login login-page="/login" authentication-failure-url="/login" always-use-default-target="true" default-target-url="/success"  />
+		<s:logout logout-success-url="/login" />
+	</s:http>
+	<s:authentication-manager alias="authenticationManager">
+		<s:authentication-provider user-service-ref="userDetailsService">
+			<s:password-encoder hash="md5" />
+		</s:authentication-provider>
+	</s:authentication-manager>
+	<!-- 项目实现的用户查询服务 -->
+	<bean id="userDetailsService" class="com.weaforce.system.component.spring.UserDetailServiceImpl" />
+</beans>

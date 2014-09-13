@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.weaforce</groupId>
+	<artifactId>weaforce-web-cms</artifactId>
+	<packaging>war</packaging>
+	<version>1.0.0</version>
+	<name>weaforce-web Maven Webapp</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<jdk.version>1.6</jdk.version>
+		<weaforce.version>1.0.0</weaforce.version>
+		<!-- <spring.version>3.2.0.RELEASE</spring.version> <jetty.version>7.6.8.v20121106</jetty.version> 
+			<jackson.version>2.1.2</jackson.version> -->
+	</properties>
+	<dependencies>
+		<!-- Weaforce system -->
+		<dependency>
+			<groupId>com.weaforce</groupId>
+			<artifactId>weaforce-system</artifactId>
+			<version>${weaforce.version}</version>
+		</dependency>
+		<!-- Commons dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<!-- jstl -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!-- Mysql -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib</artifactId>
+			<version>2.2.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.6.12</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>sitemesh</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		<!-- common-logging 实际调用slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jcl-over-slf4j</artifactId>
+			<version>1.7.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<!-- CKEditor -->
+		<dependency>
+			<groupId>com.ckeditor</groupId>
+			<artifactId>ckeditor-java-core</artifactId>
+			<version>3.5.3</version>
+		</dependency>
+		<!-- java.util.logging 实际调用slf4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>jul-to-slf4j</artifactId>
+			<version>1.7.2</version>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>weaforce-web-cms-${weaforce.version}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<executions>
+					<execution>
+						<id>default-testCompile</id>
+						<phase>test-compile</phase>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<charset>UTF-8</charset>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
+				<configuration>
+					<webApp>${basedir}/target/weaforce-web-cms-${weaforce.version}.war</webApp>
+					<contextPath>/</contextPath>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8080</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<locales>zh_CN</locales>
+					<outputEncoding>UTF-8</outputEncoding>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>Central Repository</name>
+			<url>http://repo.maven.apache.org/maven2</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+</project>

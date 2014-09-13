@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>Web Enterprise Application Force</display-name>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath*:/applicationContext.xml,
+			classpath*:/applicationContext-security.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>osivFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>sitemeshFilter</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemeshFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<servlet>
+		<servlet-name>download_servlet</servlet-name>
+		<servlet-class>com.weaforce.system.servlet.DownloadFileServlet</servlet-class>
+	</servlet>
+	<!-- /common/jsp/upload-image.jsp -->
+	<servlet>
+		<servlet-name>upload_image_servlet</servlet-name>
+		<servlet-class>com.weaforce.cms.servlet.UploadImageServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>upload_photo_servlet</servlet-name>
+		<servlet-class>com.weaforce.cms.servlet.UploadPhotoServlet</servlet-class>
+	</servlet>
+	<servlet>
+		<servlet-name>Connector</servlet-name>
+		<servlet-class>com.weaforce.system.component.fckeditor.connector.ConnectorServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>osivFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- Spring Security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- Spring Security -->
+	<!-- Spring MVC -->
+	<servlet>
+		<servlet-name>springServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	<!-- Spring MVC -->
+	<servlet-mapping>
+		<servlet-name>download_servlet</servlet-name>
+		<url-pattern>/cms/download_servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>upload_image_servlet</servlet-name>
+		<url-pattern>/cms/upload_image_servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>upload_photo_servlet</servlet-name>
+		<url-pattern>/cms/upload_photo_servlet</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>Connector</servlet-name>
+		<url-pattern>/cms/ckeditor_connector</url-pattern>
+	</servlet-mapping>
+	<session-config>
+		<session-timeout>20</session-timeout>
+	</session-config>
+	<error-page>
+		<error-code>403</error-code>
+		<location>/common/jsp/403.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/common/jsp/404.jsp</location>
+	</error-page>
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost:3306/easybea
+		</property>
+		<property name="useUnicode">true</property>
+		<property name="connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password">
+			easy
+		</property>
+		<property name="hibernate.connection.autocommit">
+			false
+		</property>
+		<!-- ********** global settings ********** -->
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">0</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.max_size">15</property>
+		<property name="hibernate.c3p0.timeout">0</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="jdbc.batch_size">30</property>
+		<property name="use_outer_join">false</property>
+		<property name="default_batch_fetch_size">50</property>
+		<property name="jdbc.use_scrollable_resultset">true</property>
+		<property name="jdbc.use_reflection_optimizer">true</property>
+	</session-factory>
+</hibernate-configuration>
